@@ -5,12 +5,4 @@ import manifest from "./src/manifest.json";
 
 export default defineConfig({
   plugins: [react(), crx({ manifest })],
-  build: {
-    outDir: "dist",
-    rollupOptions: {
-      input: {
-        popup: "src/popup/index.html",
-      },
-    },
-  },
 });
