@@ -3,7 +3,7 @@
 > ⚙️ _Built during Weapons of Liberation hackaton https://x.com/OpenOrdinal_
 
 <div align="center">
-  <img src="images/logo-1080.png" alt="OutLoud Logo" width="128" height="128">
+  <img src="public/images/logo-1080.png" alt="OutLoud Logo" width="128" height="128">
   
   **Preserve Free Speech on Bitcoin**
   
