@@ -34,22 +34,23 @@ export function Popup(): React.JSX.Element {
   return (
     <div className="container-popup">
       <Header subtitle="No voice can be silenced or erased from history" />
-      <MemoryRouter initialEntries={["/"]}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/inscribe"
-            element={
-              <InscribePage
-                post={postMock}
-                onInscribe={handleInscribe}
-                isInscribing={isInscribing}
-              />
-            }
-          />
-        </Routes>
-      </MemoryRouter>
-
+      <div className="content">
+        <MemoryRouter initialEntries={["/"]}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/inscribe"
+              element={
+                <InscribePage
+                  post={postMock}
+                  onInscribe={handleInscribe}
+                  isInscribing={isInscribing}
+                />
+              }
+            />
+          </Routes>
+        </MemoryRouter>
+      </div>
       <Footer isReady={!isInscribing} />
     </div>
   );

@@ -152,9 +152,13 @@ $transition-slow: 0.3s ease;
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
+  height: auto;
+}
+
+body {
   font-family: $font-family;
   background: $bg-primary;
   color: $text-primary;
@@ -165,7 +169,6 @@ body {
   background: $bg-primary;
   color: $text-primary;
   font-family: $font-family;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -601,7 +604,7 @@ body {
 
 // === PAGE STYLES ===
 .home-page {
-  padding: $space-2xl;
+  padding: $space-xl 0;
   text-align: center;
 
   h1 {
