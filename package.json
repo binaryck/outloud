@@ -1,0 +1,22 @@
+{
+  "name": "outloud",
+  "version": "1.0.0",
+  "description": "A Chrome extension that inscribes social media posts on Bitcoin's immutable ledger",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.0.6",
+    "vite-plugin-crx": "^0.0.0-beta.0"
+  }
+}
