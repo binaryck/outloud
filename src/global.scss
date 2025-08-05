@@ -152,7 +152,8 @@ $transition-slow: 0.3s ease;
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: auto;
@@ -595,6 +596,16 @@ body {
 
 .animate-bounce {
   animation: bounce 1s ease-in-out;
+}
+
+// === BACK ARROW STYLES ===
+.back-arrow {
+  color: $brand-color;
+  transition: color $transition-normal;
+
+  &:hover {
+    color: $brand-light;
+  }
 }
 
 // === OPACITY UTILITIES ===

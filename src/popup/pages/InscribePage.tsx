@@ -1,5 +1,6 @@
 import PostSection from "../components/PostSection";
 import { Post } from "../types/post";
+import { BackArrow } from "../components/BackArrow";
 
 type InscribePageProps = {
   post: Post;
@@ -13,10 +14,13 @@ export function InscribePage({
   isInscribing = false,
 }: InscribePageProps): React.JSX.Element {
   return (
-    <PostSection
-      post={post}
-      onInscribe={onInscribe}
-      isInscribing={isInscribing}
-    />
+    <>
+      <PostSection
+        post={post}
+        onInscribe={onInscribe}
+        isInscribing={isInscribing}
+      />
+      <BackArrow />
+    </>
   );
 }
