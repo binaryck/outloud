@@ -1,0 +1,6 @@
+{
+  "manifest_version": 3,
+  "name": "OutLoud",
+  "description": "A chrome extension that allows you to inscribe social media posts on Bitcoin's blockchain.",
+  "version": "0.1.0"
+}
