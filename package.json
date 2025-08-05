@@ -14,7 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.7.1"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.3",

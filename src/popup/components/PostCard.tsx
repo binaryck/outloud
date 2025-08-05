@@ -1,13 +1,8 @@
 import React from "react";
-
-interface PostData {
-  author: string;
-  content: string;
-  timestamp: string;
-}
+import { Post } from "../types/post";
 
 interface PostCardProps {
-  post: PostData;
+  post: Post;
 }
 
 export function PostCard({ post }: PostCardProps): React.JSX.Element {

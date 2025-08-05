@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import PostSection from "./components/PostSection";
 import Footer from "./components/Footer";
+import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
+import { InscribePage } from "./pages/InscribePage";
+import { Post } from "./types/post";
 
 export function Popup(): React.JSX.Element {
   const [isInscribing, setIsInscribing] = useState(false);
 
   // Mock post data
-  const postData = {
+  const postMock: Post = {
     author: "@bob",
     content: "Decentralization is the future.",
     timestamp: "2h ago",
@@ -30,12 +34,21 @@ export function Popup(): React.JSX.Element {
   return (
     <div className="container-popup">
       <Header subtitle="No voice can be silenced or erased from history" />
-
-      <PostSection
-        post={postData}
-        onInscribe={handleInscribe}
-        isInscribing={isInscribing}
-      />
+      <MemoryRouter initialEntries={["/"]}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/inscribe"
+            element={
+              <InscribePage
+                post={postMock}
+                onInscribe={handleInscribe}
+                isInscribing={isInscribing}
+              />
+            }
+          />
+        </Routes>
+      </MemoryRouter>
 
       <Footer isReady={!isInscribing} />
     </div>

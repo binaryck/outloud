@@ -598,3 +598,27 @@ body {
 .opacity-60 {
   opacity: 0.6;
 }
+
+// === PAGE STYLES ===
+.home-page {
+  padding: $space-2xl;
+  text-align: center;
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $space-lg;
+    background: linear-gradient(45deg, $brand-color, $brand-light);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: $space-3xl;
+    line-height: 1.5;
+    font-size: 0.9rem;
+  }
+}

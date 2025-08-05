@@ -1,15 +1,10 @@
 import React from "react";
 import PostCard from "./PostCard";
 import Button from "./Button";
-
-interface PostData {
-  author: string;
-  content: string;
-  timestamp: string;
-}
+import { Post } from "../types/post";
 
 interface PostSectionProps {
-  post: PostData;
+  post: Post;
   onInscribe: () => void;
   isInscribing?: boolean;
 }
