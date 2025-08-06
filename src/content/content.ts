@@ -1,13 +1,15 @@
+let username: string | null | undefined = null;
+
 console.log("Content script loaded on", window.location.href);
 
 // Try to initialize immediately if DOM is already loaded
 if (document.readyState === "loading") {
   window.addEventListener("DOMContentLoaded", () => {
-    console.log("DOMContentLoaded fired");
+    //console.log("DOMContentLoaded fired");
     initObserver();
   });
 } else {
-  console.log("DOM already loaded");
+  //console.log("DOM already loaded");
   initObserver();
 }
 
@@ -26,7 +28,11 @@ function initObserver(): void {
     mutationList: MutationRecord[],
     observer: MutationObserver
   ): void => {
-    console.log("Mutations count:", mutationList.length);
+    //console.log("Mutations count:", mutationList.length);
+    if (!username) {
+      username = getUsername();
+      console.log("Username set to:", username);
+    }
   };
 
   // Create an observer instance linked to the callback function
@@ -41,24 +47,28 @@ function initObserver(): void {
 }
 
 // Function to check if the user is logged in
-function getUsername(): string | null {
+function getUsername(): string | null | undefined {
   const isLoggedIn: boolean =
-    document.querySelector('nav[role="navigation"]') !== null &&
-    document.querySelector("article") !== null;
+    document.querySelector('[data-testid="SideNav_NewTweet_Button"]') !==
+      null ||
+    document.querySelector('[aria-label*="Post"]') !== null ||
+    document.querySelector('[data-testid="tweetButton"]') !== null;
 
-  let username: string | null = null;
+  let username: string | null | undefined;
 
   if (isLoggedIn) {
+    //console.log("User is logged in");
     const profileLink: HTMLAnchorElement | null = document.querySelector(
       'a[aria-label*="Profile"]'
     );
 
     if (profileLink) {
       const href = profileLink.getAttribute("href");
-      console.log("href:", href);
+      username = href?.includes("/") ? href.split("/")[1] : null;
     }
+  } else {
+    //console.log("User is not logged in");
   }
 
-  console.log("returning username:", username);
   return username;
 }
