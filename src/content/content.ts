@@ -50,7 +50,8 @@ function initObserver(): void {
                 // Check if this is a post from the current user (not a repost)
                 const userLink = post.querySelector(`a[href="/${username}"]`);
                 const isRepost =
-                  post.querySelector('[data-testid="socialContext"]') !== null;
+                  post.querySelector('[data-testid="socialContext"]') !==
+                    null && !post.textContent!.includes("Pinned");
 
                 if (
                   userLink &&
