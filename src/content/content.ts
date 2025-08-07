@@ -107,6 +107,107 @@ function getUsername(): string | null | undefined {
   return username;
 }
 
+// Extract post data from the DOM element
+function extractPostData(
+  post: HTMLElement
+): { author: string; content: string; timestamp: string } | null {
+  try {
+    // Extract author (username)
+    const authorElement = post.querySelector(
+      '[data-testid="User-Name"] a, [data-testid="User-Names"] a'
+    );
+    const author =
+      authorElement?.getAttribute("href")?.replace("/", "@") || "@unknown";
+
+    // Extract post content
+    const contentElement = post.querySelector('[data-testid="tweetText"]');
+    const content = contentElement?.textContent?.trim() || "";
+
+    // Extract timestamp
+    const timeElement = post.querySelector("time");
+    const timestamp =
+      timeElement?.getAttribute("datetime") ||
+      timeElement?.textContent ||
+      "unknown";
+
+    if (!content) {
+      //console.warn("Could not extract post content");
+      return null;
+    }
+
+    return {
+      author,
+      content,
+      timestamp,
+    };
+  } catch (error) {
+    //console.error("Error extracting post data:", error);
+    return null;
+  }
+}
+
+// Show a temporary notification to the user
+function showNotification(message: string): void {
+  // Create notification element
+  const notification = document.createElement("div");
+  notification.textContent = message;
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    max-width: 300px;
+    animation: slideIn 0.3s ease-out;
+  `;
+
+  // Add animation keyframes
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Add notification to page
+  document.body.appendChild(notification);
+
+  // Remove notification after 4 seconds
+  setTimeout(() => {
+    notification.style.animation = "slideOut 0.3s ease-out";
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 300);
+  }, 4000);
+}
+
 // Add repost button to user's posts
 function addRepostButton(post: HTMLElement): void {
   const actionsBar = post.querySelector('[role="group"]');
@@ -130,8 +231,56 @@ function addRepostButton(post: HTMLElement): void {
       button.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
     };
 
-    button.onclick = () =>
-      console.log("Repost on Bitcoin clicked for tweet:", post);
+    button.onclick = async () => {
+      try {
+        const postData = extractPostData(post);
+        if (!postData) {
+          console.error("Failed to extract post data");
+          return;
+        }
+
+        // Store the post data in Chrome storage for the popup to access
+        await chrome.storage.local.set({
+          selectedPost: postData,
+          timestamp: Date.now(), // Add timestamp to ensure freshness
+        });
+
+        // Send message to background script to open popup
+        chrome.runtime
+          .sendMessage({
+            action: "openPopupWithPost",
+            post: postData,
+          })
+          .then((response) => {
+            if (response?.success) {
+              //console.log("Popup opened successfully");
+            } else if (response?.needsManualOpen) {
+              showNotification(
+                "Click the OutLoud extension icon to inscribe this post!"
+              );
+            }
+          })
+          .catch((error: unknown) => {
+            //console.log("Failed", error);
+            showNotification(
+              "Post saved! Click the OutLoud extension icon to inscribe."
+            );
+          });
+
+        // Visual feedback
+        button.innerHTML = "✓ Selected";
+        button.style.background = "linear-gradient(135deg, #10b981, #059669)";
+
+        // Reset button after a delay
+        setTimeout(() => {
+          button.innerHTML = "Repost on Bitcoin";
+          button.style.background = "linear-gradient(135deg, #f97316, #ea580c)";
+        }, 2000);
+      } catch (error) {
+        //console.error("Error on button click:", error);
+      }
+    };
+
     actionsBar.appendChild(button);
   }
 }
