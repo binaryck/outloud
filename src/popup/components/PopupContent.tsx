@@ -104,67 +104,8 @@ export function PopupContent(): React.JSX.Element {
       //console.log("Inscription order created:", orderData);
 
       if (orderData.charge?.address) {
-        const paymentAddress = orderData.charge.address;
-        const amount = orderData.charge.amount; // Amount in satoshis
-
-        // Try XVerse wallet first
-        if (
-          typeof window !== "undefined" &&
-          (window as any).XverseProviders?.BitcoinProvider
-        ) {
-          console.log("XVerse wallet detected, attempting payment...");
-          try {
-            // Convert satoshis to BTC for XVerse (it expects BTC amounts)
-            const btcAmount = amount / 100000000; // Convert satoshis to BTC
-
-            const response = await (
-              window as any
-            ).XverseProviders.BitcoinProvider.request("sendTransfer", {
-              recipients: [
-                {
-                  address: paymentAddress,
-                  amount: btcAmount,
-                },
-              ],
-            });
-
-            if (response.status === "success") {
-              console.log(
-                "XVerse payment transaction sent:",
-                response.result.txid
-              );
-            } else {
-              throw new Error("XVerse payment failed");
-            }
-          } catch (xverseError) {
-            console.error("XVerse wallet payment failed:", xverseError);
-            // Fall through to Unisat
-          }
-        }
-        // Try to use Unisat wallet
-        else if (window.unisat) {
-          /*console.log(
-            "Unisat wallet detected as fallback, attempting payment..."
-          );*/
-          try {
-            const txid = await window.unisat.sendBitcoin(
-              paymentAddress,
-              amount
-            );
-            //console.log("Unisat payment transaction sent:", txid);
-          } catch (walletError) {
-            // Fallback to paylink
-            chrome.tabs.create({
-              url: `https://app.hel.io/pay/${orderData.paylink.id}`,
-            });
-          }
-        } else {
-          //console.log("No wallet detected, would open paylink");
-          // No wallet available, use paylink
-          chrome.tabs.create({
-            url: `https://app.hel.io/pay/${orderData.paylink.id}`,
-          });
-        }
+        console.log("Pay with wallet");
+        payWithWallet(orderData);
       } else if (orderData.paylink?.id) {
         // Fallback to paylink if no direct address
         chrome.tabs.create({
@@ -177,6 +118,64 @@ export function PopupContent(): React.JSX.Element {
       //console.error("Inscription failed:", error);
     } finally {
       setIsInscribing(false);
+    }
+  };
+
+  const payWithWallet = async (orderData: any) => {
+    const paymentAddress = orderData.charge.address;
+    const amount = orderData.charge.amount; // Amount in satoshis
+
+    // Try XVerse wallet first
+    if (
+      typeof window !== "undefined" &&
+      (window as any).XverseProviders?.BitcoinProvider
+    ) {
+      console.log("XVerse wallet detected, attempting payment...");
+      try {
+        // Convert satoshis to BTC for XVerse (it expects BTC amounts)
+        const btcAmount = amount / 100000000; // Convert satoshis to BTC
+
+        const response = await (
+          window as any
+        ).XverseProviders.BitcoinProvider.request("sendTransfer", {
+          recipients: [
+            {
+              address: paymentAddress,
+              amount: btcAmount,
+            },
+          ],
+        });
+
+        if (response.status === "success") {
+          console.log("XVerse payment transaction sent:", response.result.txid);
+        } else {
+          throw new Error("XVerse payment failed");
+        }
+      } catch (xverseError) {
+        console.error("XVerse wallet payment failed:", xverseError);
+        // Fall through to Unisat
+      }
+    }
+    // Try to use Unisat wallet
+    else if (window.unisat) {
+      /*console.log(
+            "Unisat wallet detected as fallback, attempting payment..."
+          );*/
+      try {
+        const txid = await window.unisat.sendBitcoin(paymentAddress, amount);
+        //console.log("Unisat payment transaction sent:", txid);
+      } catch (walletError) {
+        // Fallback to paylink
+        chrome.tabs.create({
+          url: `https://app.hel.io/pay/${orderData.paylink.id}`,
+        });
+      }
+    } else {
+      //console.log("No wallet detected, would open paylink");
+      // No wallet available, use paylink
+      chrome.tabs.create({
+        url: `https://app.hel.io/pay/${orderData.paylink.id}`,
+      });
     }
   };
 
