@@ -38,6 +38,5 @@ export function useWalletDetection() {
     };
   }, []);
 
-  //Will this be returned even if the change is inside the useEffect?
   return { xverseDetected, unisatDetected };
 }

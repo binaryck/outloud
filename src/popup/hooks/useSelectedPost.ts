@@ -38,6 +38,5 @@ export function useSelectedPost() {
     loadSelectedPost();
   }, [navigate]);
 
-  // I don't think this gets called again after the initial load
   return selectedPost;
 }

@@ -124,8 +124,8 @@
         );
         break;
       case "XVERSE_SIGN_PSBT":
-        console.log("XVerse sign psbt request received");
         if (xverseDetected && !!window.satsConnect) {
+          console.log("PageDetector sign psbt", event.data);
           window.satsConnect.signPsbt(event.data.psbt);
         }
         break;

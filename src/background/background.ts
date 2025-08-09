@@ -63,6 +63,36 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
   }
 
+  // Handle XVerse PSBT sign request from popup
+  if (message.type === "REQUEST_XVERSE_SIGN_PSBT") {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0]?.id) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "REQUEST_XVERSE_SIGN_PSBT",
+          data: message.data,
+        });
+      }
+    });
+
+    sendResponse({ success: true });
+    return true;
+  }
+
+  // Handle Unisat PSBT sign request from popup
+  if (message.type === "REQUEST_UNISAT_SIGN_PSBT") {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0]?.id) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "REQUEST_UNISAT_SIGN_PSBT",
+          data: message.data,
+        });
+      }
+    });
+
+    sendResponse({ success: true });
+    return true;
+  }
+
   return true;
 });
 

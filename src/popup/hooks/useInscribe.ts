@@ -19,7 +19,7 @@ export function useInscribe(
 
     try {
       // Get user address
-      let receiveAddress = "bc1qfclypa0ad762762m0pxzfnquj7nsq2vglhy86k";
+      let receiveAddress = "address";
 
       // Ensure we have a receive address before proceeding
       if (!receiveAddress) {
