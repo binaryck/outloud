@@ -316,7 +316,16 @@ function addRepostButton(post: HTMLElement): void {
 // Listen for messages from popup to re-check XVerse
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === "REQUEST_XVERSE_STATE") {
-    // Trigger a fresh detection
+    // Trigger a fresh detection for Xverse
     window.postMessage({ type: "TRIGGER_XVERSE_DETECTION" }, "*");
+  } else if (request.type === "REQUEST_UNISAT_STATE") {
+    // Trigger a fresh detection for Unisat
+    window.postMessage({ type: "TRIGGER_UNISAT_DETECTION" }, "*");
+  } else if (request.type === "REQUEST_XVERSE_SIGN_PSBT") {
+    // Trigger xverse signPsbt
+    window.postMessage({ type: "XVERSE_SIGN_PSBT" }, "*");
+  } else if (request.type === "REQUEST_UNISAT_SIGN_PSBT") {
+    // Trigger unisat signPsbt
+    window.postMessage({ type: "UNISAT_SIGN_PSBT" }, "*");
   }
 });

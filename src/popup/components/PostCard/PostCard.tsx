@@ -1,11 +1,15 @@
 import React from "react";
-import { Post } from "../types/post";
+import { Post } from "../../types/post";
 
 interface PostCardProps {
-  post: Post;
+  post: Post | null;
 }
 
 export function PostCard({ post }: PostCardProps): React.JSX.Element {
+  if (!post) {
+    return <div className="card-post">No post available</div>;
+  }
+
   return (
     <div className="card-post">
       <div className="post-header">

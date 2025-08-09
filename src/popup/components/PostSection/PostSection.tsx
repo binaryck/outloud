@@ -1,10 +1,10 @@
 import React from "react";
-import PostCard from "./PostCard";
-import Button from "./Button";
-import { Post } from "../types/post";
+import PostCard from "../PostCard/PostCard";
+import Button from "../Button/Button";
+import { Post } from "../../types/post";
 
 interface PostSectionProps {
-  post: Post;
+  post: Post | null;
   onInscribe: () => void;
   isInscribing?: boolean;
 }

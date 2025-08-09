@@ -2,6 +2,7 @@
 
 // Store XVerse detection state
 let xverseDetected = false;
+let unisatDetected = false;
 
 // Listen for messages from content scripts
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -36,12 +37,30 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
   }
 
+  if (message.type === "REQUEST_UNISAT_STATE") {
+    sendResponse({
+      type: "UNISAT_DETECTED",
+      detected: unisatDetected,
+    });
+  }
+
   // Handle XVerse detection from content script
   if (message.type === "XVERSE_DETECTED") {
     xverseDetected = message.detected;
 
     // Try to forward to popup if it's listening
     chrome.runtime.sendMessage(message);
+  }
+
+  // Handle Unisat detection from content script
+  if (message.type === "UNISAT_DETECTED") {
+    const unisatDetected = message.detected;
+
+    // Try to forward to popup if it's listening
+    chrome.runtime.sendMessage({
+      type: "UNISAT_DETECTED",
+      detected: unisatDetected,
+    });
   }
 
   return true;
