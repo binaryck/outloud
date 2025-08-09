@@ -1,6 +1,34 @@
 let username: string | null | undefined = null;
 
-console.log("Content script loaded on", window.location.href);
+//console.log("Content script loaded on", window.location.href);
+
+function injectScript(fileName: string) {
+  const script = document.createElement("script");
+  script.src = chrome.runtime.getURL(fileName); // MV3-safe source
+  script.type = "text/javascript";
+  document.head.appendChild(script);
+}
+
+// Listen for messages from injected script
+window.addEventListener("message", (event) => {
+  // Only accept messages from same origin
+  if (event.origin !== window.location.origin) return;
+
+  if (event.data.type === "XVERSE_DETECTED") {
+    // Send to background script
+    chrome.runtime
+      .sendMessage({
+        type: "XVERSE_DETECTED",
+        detected: event.data.detected,
+      })
+      .catch((err) => {
+        //console.log("Failed to send XVerse detection message:", err);
+      });
+  }
+});
+
+// Inject the script
+injectScript("src/scripts/pageDetector.js");
 
 // Try to initialize immediately if DOM is already loaded
 if (document.readyState === "loading") {
@@ -284,3 +312,11 @@ function addRepostButton(post: HTMLElement): void {
     actionsBar.appendChild(button);
   }
 }
+
+// Listen for messages from popup to re-check XVerse
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.type === "REQUEST_XVERSE_STATE") {
+    // Trigger a fresh detection
+    window.postMessage({ type: "TRIGGER_XVERSE_DETECTION" }, "*");
+  }
+});

@@ -16,7 +16,8 @@
     "lucide-react": "^0.536.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.7.1"
+    "react-router-dom": "^7.7.1",
+    "sats-connect": "^3.6.1"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.3",

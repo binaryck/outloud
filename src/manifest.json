@@ -3,7 +3,13 @@
   "name": "OutLoud",
   "description": "A chrome extension that allows you to inscribe social media posts on Bitcoin's blockchain.",
   "version": "0.1.0",
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["activeTab", "storage", "scripting"],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/scripts/pageDetector.js"],
+      "matches": ["https://x.com/*", "https://twitter.com/*"]
+    }
+  ],
   "background": {
     "service_worker": "src/background/background.ts",
     "type": "module"

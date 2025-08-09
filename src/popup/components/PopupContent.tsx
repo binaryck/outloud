@@ -7,9 +7,11 @@ import { InscribePage } from "../pages/InscribePage";
 import { Post } from "../types/post";
 
 export function PopupContent(): React.JSX.Element {
+  const navigate = useNavigate();
+
   const [isInscribing, setIsInscribing] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const navigate = useNavigate();
+  const [xverseDetected, setXverseDetected] = useState(false);
 
   // Load post data from storage when popup opens
   useEffect(() => {
@@ -42,6 +44,31 @@ export function PopupContent(): React.JSX.Element {
 
     loadSelectedPost();
   }, [navigate]);
+
+  useEffect(() => {
+    // Listen for XVerse detection messages
+    const messageListener = (message: any) => {
+      //console.log("Popup received message:", message);
+      if (message.type === "XVERSE_DETECTED") {
+        console.log("Setting XVerse detected:", message.detected);
+        setXverseDetected(message.detected);
+      }
+    };
+
+    chrome.runtime.onMessage.addListener(messageListener);
+
+    // Request current XVerse state from background
+    chrome.runtime.sendMessage({ type: "REQUEST_XVERSE_STATE" }, (response) => {
+      if (response && response.type === "XVERSE_DETECTED") {
+        setXverseDetected(response.detected);
+      }
+    });
+
+    // Cleanup listener on unmount
+    return () => {
+      chrome.runtime.onMessage.removeListener(messageListener);
+    };
+  }, []);
 
   const handleInscribe = async () => {
     setIsInscribing(true);
@@ -123,17 +150,15 @@ export function PopupContent(): React.JSX.Element {
 
   const payWithWallet = async (orderData: any) => {
     const paymentAddress = orderData.charge.address;
-    const amount = orderData.charge.amount; // Amount in satoshis
+    const amount = orderData.charge.amount; // Amount in sats
 
     // Try XVerse wallet first
-    if (
-      typeof window !== "undefined" &&
-      (window as any).XverseProviders?.BitcoinProvider
-    ) {
+    console.log("Attempting to detect xverse", xverseDetected);
+    if (xverseDetected) {
       console.log("XVerse wallet detected, attempting payment...");
       try {
-        // Convert satoshis to BTC for XVerse (it expects BTC amounts)
-        const btcAmount = amount / 100000000; // Convert satoshis to BTC
+        // Convert sats to BTC for XVerse (it expects BTC amounts)
+        const btcAmount = amount / 100000000; // Convert sats to BTC
 
         const response = await (
           window as any
@@ -158,9 +183,6 @@ export function PopupContent(): React.JSX.Element {
     }
     // Try to use Unisat wallet
     else if (window.unisat) {
-      /*console.log(
-            "Unisat wallet detected as fallback, attempting payment..."
-          );*/
       try {
         const txid = await window.unisat.sendBitcoin(paymentAddress, amount);
         //console.log("Unisat payment transaction sent:", txid);

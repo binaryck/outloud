@@ -1,16 +1,18 @@
 //console.log("OutLoud background script loaded");
 
+// Store XVerse detection state
+let xverseDetected = false;
+
 // Listen for messages from content scripts
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "openPopupWithPost") {
-    console.log("Post data received for popup:", message.post);
+    //console.log("Post data received for popup:", message.post);
 
     // Set badge to indicate a post is selected
     chrome.action.setBadgeText({ text: "1" });
     chrome.action.setBadgeBackgroundColor({ color: "#f97316" });
 
     // Try to open popup programmatically
-    // Note: This might not work in all contexts due to browser restrictions
     chrome.action
       .openPopup()
       .then(() => {
@@ -25,6 +27,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
 
     return true; // Keep the message channel open for async response
+  }
+
+  if (message.type === "REQUEST_XVERSE_STATE") {
+    sendResponse({
+      type: "XVERSE_DETECTED",
+      detected: xverseDetected,
+    });
+  }
+
+  // Handle XVerse detection from content script
+  if (message.type === "XVERSE_DETECTED") {
+    xverseDetected = message.detected;
+
+    // Try to forward to popup if it's listening
+    chrome.runtime.sendMessage(message);
   }
 
   return true;
