@@ -1,4 +1,4 @@
-// To complete
+// Check and extend basix interface if possible
 export interface ManagedInscriptionOrder {
   status?: string;
   charge?: {
@@ -70,4 +70,25 @@ export interface DirectInscriptionOrder {
   zeroConf: any;
 }
 
-export type OrderDetails = any;
+export type OrderDetails = {
+  additionalFeeCharged: number;
+  baseFee: number;
+  chainFee: number;
+  charge: {
+    address: string;
+    amount: number;
+    callback_url: string;
+  };
+  createdAt: number;
+  fee: number;
+  files: any[];
+  id: string;
+  orderType: string;
+  payToAnchor: boolean;
+  postage: number;
+  receiveAddress: string;
+  serviceFee: number;
+  state: string;
+  status: string;
+  uncurseIt: boolean;
+};

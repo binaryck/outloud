@@ -28,7 +28,7 @@ window.addEventListener("message", (event) => {
 });
 
 // Inject the script
-injectScript("src/scripts/pageDetector.js");
+injectScript("src/scripts/pageEventHandlers.js");
 
 // Try to initialize immediately if DOM is already loaded
 if (document.readyState === "loading") {
@@ -321,11 +321,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.type === "REQUEST_UNISAT_STATE") {
     // Trigger a fresh detection for Unisat
     window.postMessage({ type: "TRIGGER_UNISAT_DETECTION" }, "*");
-  } else if (request.type === "REQUEST_XVERSE_SIGN_PSBT") {
-    // Trigger xverse signPsbt
-    window.postMessage({ type: "XVERSE_SIGN_PSBT" }, "*");
-  } else if (request.type === "REQUEST_UNISAT_SIGN_PSBT") {
-    // Trigger unisat signPsbt
-    window.postMessage({ type: "UNISAT_SIGN_PSBT" }, "*");
+  } else if (request.type === "REQUEST_XVERSE_SEND_TRANSFER") {
+    // Trigger xverse sendTransfer
+    window.postMessage(
+      { type: "XVERSE_SEND_TRANSFER", transfer: request.data.transfer },
+      "*"
+    );
+  } else if (request.type === "REQUEST_UNISAT_SEND_TRANSFER") {
+    // Trigger unisat sendTransfer
+    window.postMessage(
+      { type: "UNISAT_SEND_TRANSFER", transfer: request.data.transfer },
+      "*"
+    );
   }
 });

@@ -56,17 +56,16 @@ export class WalletService {
         });
       console.log("Order details:", orderDetails);
 
-      // Create payment PSBT
-      const psbt = await ordinalsBotService
-        .createPaymentPsbt(orderDetails, receiverPubKey)
-        .catch((error) => {
-          console.error("Failed to create payment PSBT:", error);
-          throw new Error("Failed to create payment PSBT");
-        });
-      console.log("Created payment PSBT:", psbt);
-
       chrome.runtime.sendMessage(
-        { type: "REQUEST_XVERSE_SIGN_PSBT", data: { psbt } },
+        {
+          type: "REQUEST_XVERSE_SEND_TRANSFER",
+          data: {
+            transfer: {
+              address: orderDetails.charge?.address,
+              amount: orderDetails.charge?.amount,
+            },
+          },
+        },
         (response) => {
           console.log("XVerse PSBT sign response:", response);
           /*if (response && response.type === "UNISAT_DETECTED") {

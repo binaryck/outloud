@@ -6,7 +6,7 @@
   "permissions": ["activeTab", "storage", "scripting"],
   "web_accessible_resources": [
     {
-      "resources": ["src/scripts/pageDetector.js"],
+      "resources": ["src/scripts/pageEventHandlers.js"],
       "matches": ["https://x.com/*", "https://twitter.com/*"]
     }
   ],

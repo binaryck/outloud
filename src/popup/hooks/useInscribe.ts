@@ -20,7 +20,8 @@ export function useInscribe(
 
     try {
       // Get user address
-      let receiverPubKey = "address";
+      let receiverPubKey =
+        "bc1pgnwmg7wplc09cm9fctgmgalu7l4synjh7khwzre9qlcvg5xy0k5qz9mwe3"; // Mock address
 
       // Ensure we have a receive public key before proceeding
       if (!receiverPubKey) {

@@ -123,13 +123,22 @@
           "*"
         );
         break;
-      case "XVERSE_SIGN_PSBT":
+      case "XVERSE_SEND_TRANSFER":
+        console.log(
+          "PageEventHandlers received XVERSE_SEND_TRANSFER",
+          event.data
+        );
         if (xverseDetected && !!window.satsConnect) {
-          console.log("PageDetector sign psbt", event.data);
-          window.satsConnect.signPsbt(event.data.psbt);
+          console.log("PageEventHandlers send transfer", event.data);
+          window.satsConnect.sendTransfer({
+            recipients: {
+              address: event.data.transfer.address,
+              amount: event.data.transfer.amount,
+            },
+          });
         }
         break;
-      case "UNISAT_SIGN_PSBT":
+      case "UNISAT_SEND_TRANSFER":
         if (unisatDetected && !!window.unisat) {
           window.unisat.signPsbt(event.data.psbt);
         }

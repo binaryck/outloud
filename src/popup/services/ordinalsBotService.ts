@@ -35,7 +35,7 @@ export class OrdinalsBotService {
 
   static getOrder = async (orderId: string) => {
     const response = await fetch(
-      "https://api.ordinalsbot.com/order/id=" + orderId,
+      "https://api.ordinalsbot.com/order?id=" + orderId,
       {
         method: "GET",
         //headers: {
@@ -55,6 +55,7 @@ export class OrdinalsBotService {
     return orderData;
   };
 
+  //Leave for now
   static createPaymentPsbt = async (
     order: OrderDetails,
     receiverPubKey: string
@@ -70,9 +71,9 @@ export class OrdinalsBotService {
         body: JSON.stringify({
           orderId: order.id,
           paymentAddress: order.charge?.address,
-          paymentPublicKey: receiverPubKey, // To get from wallet
-          ordinalAddress: receiverPubKey, // To get from wallet
-          ordinalPublicKey: receiverPubKey, // To get from wallet
+          paymentPublicKey: receiverPubKey, // To get
+          ordinalAddress: receiverPubKey, // To get
+          ordinalPublicKey: receiverPubKey, // To get
         }),
       }
     );
