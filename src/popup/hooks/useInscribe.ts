@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Post } from "../types/post";
 import { useServices } from "../context/serviceContext";
+import { DusmPost } from "../types/dusm";
 
 export function useInscribe(
   post: Post | null,
@@ -19,37 +20,31 @@ export function useInscribe(
 
     try {
       // Get user address
-      let receiveAddress = "address";
+      let receiverPubKey = "address";
 
-      // Ensure we have a receive address before proceeding
-      if (!receiveAddress) {
+      // Ensure we have a receive public key before proceeding
+      if (!receiverPubKey) {
         throw new Error(
           "Failed to get wallet address. Please connect your Unisat wallet and try again."
         );
       }
 
       // Prepare the post content as JSON for inscription
-      const postContent = {
+      const inscription: DusmPost = {
+        p: "dusm",
+        op: "pub",
+        type: "post",
+        txt: post.content,
         author: post.author,
-        content: post.content,
-        timestamp: post.timestamp,
-        platform: "outloud",
+        from: post.platform,
+        edit: false,
       };
-
-      // Convert content to base64 dataURL as required by Ordinals Bot API
-      const contentString = JSON.stringify(postContent, null, 2);
-      const base64Content = btoa(contentString);
-      const dataURL = `data:text/plain;base64,${base64Content}`;
-
-      //console.log("Inscription order created:", orderData);
 
       if (xverseDetected) {
         walletService.payWithXverse(
-          ordinalsBotService /*, {
-          contentString,
-          dataURL,
-          receiveAddress,
-        }*/
+          ordinalsBotService,
+          inscription,
+          receiverPubKey
         );
       } else if (unisatDetected) {
         walletService.payWithUnisat();

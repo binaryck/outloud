@@ -1,5 +1,5 @@
 // To complete
-export interface Order {
+export interface ManagedInscriptionOrder {
   status?: string;
   charge?: {
     id: string; // Order ID
@@ -39,3 +39,35 @@ export interface Order {
   webhookUrl?: any | null;
   zeroConf?: any | null;
 }
+
+export interface DirectInscriptionOrder {
+  additionalFee: any;
+  additionalFeeCharged: any;
+  allowedSatributes: any;
+  baseFee: number;
+  chainFee: number;
+  charge: {
+    amount: number;
+  };
+  createdAt: any;
+  delegates: any;
+  fee: number;
+  files: any[];
+  id: string;
+  inscriptionIdPrefix: any;
+  orderType: string;
+  parents: any;
+  payToAnchor: boolean;
+  postage: number;
+  projectTag: any;
+  receiveAddress: string;
+  referral: any;
+  serviceFee: number;
+  state: string;
+  status: string;
+  uncurseIt: boolean;
+  webhookUrl: string | null;
+  zeroConf: any;
+}
+
+export type OrderDetails = any;
