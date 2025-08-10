@@ -124,22 +124,21 @@
         );
         break;
       case "XVERSE_SEND_TRANSFER":
-        console.log(
-          "PageEventHandlers received XVERSE_SEND_TRANSFER",
-          event.data
-        );
-        if (xverseDetected && !!window.satsConnect) {
-          console.log("PageEventHandlers send transfer", event.data);
-          window.satsConnect.sendTransfer({
-            recipients: {
-              address: event.data.transfer.address,
-              amount: event.data.transfer.amount,
-            },
+        if (xverseDetected && !!window.XverseProviders.BitcoinProvider) {
+          console.log("PageEventHandlers XVerse send transfer", event.data);
+          window.XverseProviders.BitcoinProvider.request("sendTransfer", {
+            recipients: [
+              {
+                address: event.data.transfer.address,
+                amount: event.data.transfer.amount,
+              },
+            ],
           });
         }
         break;
       case "UNISAT_SEND_TRANSFER":
         if (unisatDetected && !!window.unisat) {
+          console.log("PageEventHandlers Unisat send transfer", event.data);
           window.unisat.signPsbt(event.data.psbt);
         }
         break;
