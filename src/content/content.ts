@@ -25,6 +25,18 @@ window.addEventListener("message", (event) => {
         //console.log("Failed to send XVerse detection message:", err);
       });
   }
+
+  if (event.data.type === "UNISAT_DETECTED") {
+    // Send to background script
+    chrome.runtime
+      .sendMessage({
+        type: "UNISAT_DETECTED",
+        detected: event.data.detected,
+      })
+      .catch((err) => {
+        //console.log("Failed to send XVerse detection message:", err);
+      });
+  }
 });
 
 // Inject the script
@@ -317,21 +329,27 @@ function addRepostButton(post: HTMLElement): void {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === "REQUEST_XVERSE_STATE") {
     // Trigger a fresh detection for Xverse
-    window.postMessage({ type: "TRIGGER_XVERSE_DETECTION" }, "*");
+    window.postMessage(
+      { type: "TRIGGER_XVERSE_DETECTION" },
+      window.location.origin
+    );
   } else if (request.type === "REQUEST_UNISAT_STATE") {
     // Trigger a fresh detection for Unisat
-    window.postMessage({ type: "TRIGGER_UNISAT_DETECTION" }, "*");
+    window.postMessage(
+      { type: "TRIGGER_UNISAT_DETECTION" },
+      window.location.origin
+    );
   } else if (request.type === "REQUEST_XVERSE_SEND_TRANSFER") {
     // Trigger xverse sendTransfer
     window.postMessage(
       { type: "XVERSE_SEND_TRANSFER", transfer: request.data.transfer },
-      "*"
+      window.location.origin
     );
   } else if (request.type === "REQUEST_UNISAT_SEND_TRANSFER") {
     // Trigger unisat sendTransfer
     window.postMessage(
       { type: "UNISAT_SEND_TRANSFER", transfer: request.data.transfer },
-      "*"
+      window.location.origin
     );
   }
 });

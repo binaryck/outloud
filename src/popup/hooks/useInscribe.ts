@@ -48,7 +48,11 @@ export function useInscribe(
           receiverPubKey
         );
       } else if (unisatDetected) {
-        walletService.payWithUnisat();
+        walletService.payWithUnisat(
+          ordinalsBotService,
+          inscription,
+          receiverPubKey
+        );
       }
     } catch (error) {
       //console.error("Inscription failed:", error);

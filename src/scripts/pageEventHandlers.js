@@ -100,32 +100,34 @@
 
   // Listen for manual trigger requests from content script
   window.addEventListener("message", (event) => {
+    if (event.origin !== window.location.origin) return;
+    if (!event.data?.type) return;
+
     switch (event.data.type) {
       case "TRIGGER_XVERSE_DETECTION":
-        const currentDetected = detectXverseWallet();
+        xverseDetected = detectXverseWallet();
 
-        xverseDetected = currentDetected;
         window.postMessage(
           {
             type: "XVERSE_DETECTED",
-            detected: currentDetected,
+            detected: xverseDetected,
           },
-          "*"
+          window.location.origin
         );
         break;
       case "TRIGGER_UNISAT_DETECTION":
-        const unisatDetected = !!window.unisat;
+        unisatDetected = !!window.unisat;
+
         window.postMessage(
           {
             type: "UNISAT_DETECTED",
             detected: unisatDetected,
           },
-          "*"
+          window.location.origin
         );
         break;
       case "XVERSE_SEND_TRANSFER":
         if (xverseDetected && !!window.XverseProviders.BitcoinProvider) {
-          console.log("PageEventHandlers XVerse send transfer", event.data);
           window.XverseProviders.BitcoinProvider.request("sendTransfer", {
             recipients: [
               {
@@ -138,8 +140,10 @@
         break;
       case "UNISAT_SEND_TRANSFER":
         if (unisatDetected && !!window.unisat) {
-          console.log("PageEventHandlers Unisat send transfer", event.data);
-          window.unisat.signPsbt(event.data.psbt);
+          window.unisat.sendBitcoin(
+            event.data.transfer.address,
+            event.data.transfer.amount
+          );
         }
         break;
       default:

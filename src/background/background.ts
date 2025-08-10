@@ -54,7 +54,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   // Handle Unisat detection from content script
   if (message.type === "UNISAT_DETECTED") {
-    const unisatDetected = message.detected;
+    unisatDetected = message.detected;
 
     // Try to forward to popup if it's listening
     chrome.runtime.sendMessage({

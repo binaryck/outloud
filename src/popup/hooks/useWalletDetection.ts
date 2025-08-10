@@ -6,7 +6,9 @@ export function useWalletDetection() {
 
   useEffect(() => {
     // Listen for XVerse detection messages
-    const messageListener = (message: any) => {
+    // Communication not available
+    /*const messageListener = (message: any) => {
+      console.log("Popup message:", message);
       if (message.type === "XVERSE_DETECTED") {
         //console.log("Setting XVerse detected:", message.detected);
         setXverseDetected(message.detected);
@@ -16,7 +18,7 @@ export function useWalletDetection() {
       }
     };
 
-    chrome.runtime.onMessage.addListener(messageListener);
+    chrome.runtime.onMessage.addListener(messageListener);*/
 
     // Request current XVerse state from background
     chrome.runtime.sendMessage({ type: "REQUEST_XVERSE_STATE" }, (response) => {
@@ -32,10 +34,12 @@ export function useWalletDetection() {
       }
     });
 
+    return () => {};
     // Cleanup listener on unmount
-    return () => {
+    // Listener not available
+    /*return () => {
       chrome.runtime.onMessage.removeListener(messageListener);
-    };
+    };*/
   }, []);
 
   return { xverseDetected, unisatDetected };
