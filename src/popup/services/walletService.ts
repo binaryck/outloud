@@ -6,7 +6,7 @@ import { Order } from "../types/order";
 export class WalletService {
   static payWithXverse = (
     ordinalsBotService: typeof OrdinalsBotService,
-    order: Order = { id: "" }
+    order: Order = {}
   ) => {
     try {
       console.log("Sending XVerse payment for order:", order);
@@ -29,7 +29,7 @@ export class WalletService {
     } catch (walletError) {
       // Fallback to paylink
       ordinalsBotService
-        .createOrdinalsBotOrder
+        .createOrder
         /*contentString,
           dataURL,
           receiveAddress*/

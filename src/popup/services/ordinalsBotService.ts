@@ -1,6 +1,8 @@
+import { Order } from "../types/order";
+
 export class OrdinalsBotService {
   //why here static and not const
-  static createOrdinalsBotOrder = async (
+  static createOrder = async (
     contentString: string = "",
     dataURL: string = "",
     receiveAddress: string = ""
@@ -43,5 +45,39 @@ export class OrdinalsBotService {
         url: `https://app.hel.io/pay/${orderData.paylink.id}`,
       });
     }
+  };
+
+  static createPaymentPsbt = async (order: Order) => {
+    const response = await fetch(
+      "https://api.ordinalsbot.com/tokenpay/create-payment-psbt",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderId: "order123",
+          paymentAddress: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+          paymentPublicKey:
+            "02b463a1e6b8e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1",
+          ordinalAddress: "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kygt080",
+          ordinalPublicKey:
+            "03b463a1e6b8e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1e1a1",
+          feeRate: 0.0001,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `Failed to create payment PSBT: ${response.statusText} - ${errorText}`
+      );
+    }
+
+    const psbtData = await response.json();
+
+    return psbtData;
   };
 }
