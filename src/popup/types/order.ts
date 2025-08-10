@@ -18,5 +18,24 @@ export interface Order {
   serviceFee?: number; // in satoshis
   orderType?: string;
   nonStandardTx?: boolean; //  400kb-4MB transaction, reveal tx will not be visible in public mempool
-  createdAt?: number; // timestamp in ms,
+  createdAt?: number; // timestamp in ms
+  additionalFee?: number | null;
+  additionalFeeCharged?: number;
+  baseFee?: number;
+  batchMode?: any | null;
+  compress?: any | null;
+  delegates?: any | null;
+  fee?: number;
+  files?: any[];
+  id?: string;
+  parent?: any | null;
+  postage?: number;
+  projectTag?: any | null;
+  rareSats?: string;
+  rareSatsFee?: number;
+  receiveAddress?: string;
+  referral?: any | null;
+  state?: string;
+  webhookUrl?: any | null;
+  zeroConf?: any | null;
 }
