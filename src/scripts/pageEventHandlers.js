@@ -36,7 +36,7 @@
       type: "XVERSE_DETECTED",
       detected: xverseDetected,
     },
-    "*"
+    window.location.origin
   );
 
   // Send Unisat result back to content script
@@ -45,19 +45,19 @@
       type: "UNISAT_DETECTED",
       detected: unisatDetected,
     },
-    "*"
+    window.location.origin
   );
 
   // Also try detection after a short delay in case wallet loads later
   setTimeout(() => {
-    detected = detectXverseWallet();
+    xverseDetected = detectXverseWallet();
 
     window.postMessage(
       {
         type: "XVERSE_DETECTED",
-        detected,
+        detected: xverseDetected,
       },
-      "*"
+      window.location.origin
     );
 
     unisatDetected = !!window.unisat;
@@ -66,20 +66,20 @@
         type: "UNISAT_DETECTED",
         detected: unisatDetected,
       },
-      "*"
+      window.location.origin
     );
-  }, 2000);
+  }, 3000);
 
   // Listen for wallet injection events
   const observer = new MutationObserver(() => {
     if (detectXverseWallet() !== xverseDetected) {
-      xverseDetected = newDetected;
+      xverseDetected = detectXverseWallet();
       window.postMessage(
         {
           type: "XVERSE_DETECTED",
-          detected,
+          detected: xverseDetected,
         },
-        "*"
+        window.location.origin
       );
     }
 
@@ -90,7 +90,7 @@
           type: "UNISAT_DETECTED",
           detected: unisatDetected,
         },
-        "*"
+        window.location.origin
       );
     }
   });
