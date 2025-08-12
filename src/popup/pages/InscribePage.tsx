@@ -4,7 +4,7 @@ import { BackArrow } from "../components/BackArrow/BackArrow";
 
 type InscribePageProps = {
   post: Post | null;
-  onInscribe: () => Promise<void>;
+  onInscribe: (receiverPubKey: string) => Promise<void>;
   isInscribing?: boolean;
 };
 

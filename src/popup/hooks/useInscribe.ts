@@ -11,7 +11,7 @@ export function useInscribe(
   const { walletService, ordinalsBotService } = useServices();
   const [isInscribing, setIsInscribing] = useState(false);
 
-  const handleInscribe = async () => {
+  const handleInscribe = async (receiverPubKey: string) => {
     setIsInscribing(true);
     if (!post) {
       setIsInscribing(false);
@@ -19,14 +19,10 @@ export function useInscribe(
     }
 
     try {
-      // Get user address
-      let receiverPubKey =
-        "bc1pgnwmg7wplc09cm9fctgmgalu7l4synjh7khwzre9qlcvg5xy0k5qz9mwe3"; // Mock address
-
       // Ensure we have a receive public key before proceeding
       if (!receiverPubKey) {
         throw new Error(
-          "Failed to get wallet address. Please connect your Unisat wallet and try again."
+          "Failed to get wallet address. Please provide a valid receiver address."
         );
       }
 

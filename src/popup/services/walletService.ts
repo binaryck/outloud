@@ -114,6 +114,8 @@ export class WalletService {
         receiverPubKey
       );
 
+      console.log("Order details:", orderDetails);
+
       chrome.runtime.sendMessage(
         {
           type: "REQUEST_UNISAT_SEND_TRANSFER",
