@@ -253,7 +253,7 @@ body {
   font-size: $font-size-base;
   font-weight: $font-weight-semibold;
   cursor: pointer;
-  transition: $transition-normal;
+  transition: all $transition-normal;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: relative;
@@ -271,11 +271,79 @@ body {
   @extend .btn;
   background: linear-gradient(135deg, $brand-color 0%, $brand-light 100%);
   color: $text-inverse;
-  box-shadow: $shadow-brand;
+  box-shadow: 0 4px 15px rgba(247, 147, 26, 0.3);
+  border: 1px solid rgba(247, 147, 26, 0.5);
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.6s ease;
+    z-index: -1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(247, 147, 26, 0.8) 0%,
+      rgba(255, 179, 71, 0.8) 100%
+    );
+    opacity: 0;
+    transition: opacity $transition-normal;
+    z-index: -1;
+  }
 
   &:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: $shadow-brand-hover;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(247, 147, 26, 0.4),
+      0 0 20px rgba(247, 147, 26, 0.2);
+
+    &::before {
+      left: 100%;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0) scale(1);
+    transition: transform 0.1s ease;
+  }
+
+  // Pulse animation
+  &.btn-pulse {
+    animation: btnPulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes btnPulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 15px rgba(247, 147, 26, 0.3),
+      0 0 0 0 rgba(247, 147, 26, 0.7);
+  }
+  50% {
+    box-shadow: 0 4px 15px rgba(247, 147, 26, 0.3),
+      0 0 0 10px rgba(247, 147, 26, 0);
   }
 }
 
@@ -602,6 +670,7 @@ body {
 .back-arrow {
   color: $brand-color;
   transition: color $transition-normal;
+  width: 30px;
 
   &:hover {
     color: $brand-light;
@@ -613,26 +682,380 @@ body {
   opacity: 0.6;
 }
 
-// === PAGE STYLES ===
-.home-page {
-  padding: $space-xl 0;
+// === HOME PAGE ===
+.home-page-v2 {
+  display: flex;
+  flex-direction: column;
+  //min-height: 500px;
+  background: radial-gradient(
+      ellipse at center,
+      rgba(247, 147, 26, 0.03) 0%,
+      transparent 70%
+    ),
+    linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 48%,
+        rgba(247, 147, 26, 0.1) 49%,
+        rgba(247, 147, 26, 0.1) 51%,
+        transparent 52%
+      ),
+      linear-gradient(
+        -45deg,
+        transparent 48%,
+        rgba(247, 147, 26, 0.05) 49%,
+        rgba(247, 147, 26, 0.05) 51%,
+        transparent 52%
+      );
+    background-size: 60px 60px;
+    opacity: 0.3;
+    pointer-events: none;
+    animation: gridMove 20s linear infinite;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(
+        circle at 20% 80%,
+        rgba(247, 147, 26, 0.1) 1px,
+        transparent 1px
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        rgba(247, 147, 26, 0.1) 1px,
+        transparent 1px
+      ),
+      radial-gradient(
+        circle at 40% 40%,
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px
+      );
+    background-size: 120px 120px, 180px 180px, 90px 90px;
+    animation: floatingParticles 15s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  // Entrance animations
+  .hero-section {
+    animation: slideInFromTop 0.8s ease-out;
+  }
+
+  .process-flow {
+    animation: slideInFromLeft 1s ease-out 0.3s both;
+  }
+
+  .action-zone {
+    animation: slideInFromBottom 1s ease-out 0.6s both;
+  }
+}
+
+@keyframes floatingParticles {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-3deg);
+  }
+}
+
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(60px, 60px);
+  }
+}
+
+.hero-section {
   text-align: center;
+  padding: $space-xl $space-lg $space-xl;
+  position: relative;
+  z-index: 1;
+}
 
-  h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: $text-primary;
-    margin-bottom: $space-lg;
-    background: linear-gradient(45deg, $brand-color, $brand-light);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-lg;
+  margin-bottom: $space-sm;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(
+      circle,
+      rgba(247, 147, 26, 0.2) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulse 3s ease-in-out infinite;
+  }
+}
+
+.logo-symbol {
+  font-size: 3rem;
+  background: linear-gradient(
+    135deg,
+    $brand-color 0%,
+    $brand-light 50%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 10px rgba(247, 147, 26, 0.3));
+  animation: logoFloat 4s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.brand-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, $text-primary 0%, $text-secondary 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.tagline {
+  font-size: 1.1rem;
+  color: $text-muted;
+  margin: $space-sm 0 0 0;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+.process-flow {
+  padding: 0 $space-xl $space-4xl;
+  position: relative;
+  z-index: 1;
+}
+
+.flow-title {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $brand-color;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: $space-2xl;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $brand-color, transparent);
+  }
+}
+
+.flow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-md;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.flow-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  position: relative;
+  transition: all $transition-slow;
+  flex-shrink: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+    background: radial-gradient(
+      circle,
+      rgba(247, 147, 26, 0.15) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity $transition-slow;
+    z-index: -1;
   }
 
-  p {
-    color: $text-secondary;
-    margin-bottom: $space-3xl;
-    line-height: 1.5;
-    font-size: 0.9rem;
+  &:hover {
+    transform: translateY(-2px);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .flow-icon {
+      transform: scale(1.1) rotateY(10deg);
+      box-shadow: 0 8px 25px rgba(247, 147, 26, 0.4);
+    }
+
+    .flow-text {
+      color: $brand-color;
+    }
   }
+}
+
+.flow-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(247, 147, 26, 0.2) 0%,
+    rgba(247, 147, 26, 0.05) 100%
+  );
+  border: 1px solid rgba(247, 147, 26, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  backdrop-filter: blur(10px);
+  transition: all $transition-slow;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, $brand-color, transparent, $brand-color);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity $transition-slow;
+    z-index: -1;
+  }
+
+  &:hover::after {
+    opacity: 0.3;
+  }
+}
+
+.flow-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $text-secondary;
+  //text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.flow-arrow {
+  font-size: 1.2rem;
+  color: $brand-color;
+  opacity: 0.6;
+  animation: arrowPulse 2s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+}
+
+.action-zone {
+  padding: 0 $space-lg $space-2xl;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hint-text {
+  margin-top: $space-lg;
+  font-size: 0.8rem;
+  color: $text-muted;
+  opacity: 0.7;
+  line-height: 1.4;
 }
