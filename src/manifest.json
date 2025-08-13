@@ -4,7 +4,7 @@
   "description": "Archive your social media posts with immutable, decentralized storage technology for permanent preservation.",
   "version": "0.1.0",
   "version-name": "0.1.0",
-  "privacy_policy": "https://github.com/binaryck/outloud/blob/main/PRIVACY_POLICY.md",
+  "privacy_policy": "https://github.com/binaryck/outloud/blob/master/PRIVACY_POLICY.md",
   "permissions": ["activeTab", "storage", "scripting"],
   "web_accessible_resources": [
     {
