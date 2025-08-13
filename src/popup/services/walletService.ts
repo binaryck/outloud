@@ -114,7 +114,7 @@ export class WalletService {
         receiverPubKey
       );
 
-      console.log("Order details:", orderDetails);
+      //console.log("Order details:", orderDetails);
 
       chrome.runtime.sendMessage(
         {

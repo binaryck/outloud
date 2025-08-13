@@ -1,7 +1,7 @@
 {
   "name": "outloud",
-  "version": "1.0.0",
-  "description": "A Chrome extension that inscribes social media posts on Bitcoin's immutable ledger",
+  "version": "0.1.0",
+  "description": "Archive your social media posts with immutable, decentralized storage technology for permanent preservation.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
     "build": "vite build"
   },
   "keywords": [],
-  "author": "",
+  "author": "binaryck",
   "license": "ISC",
   "dependencies": {
     "@chakra-ui/react": "^3.24.2",

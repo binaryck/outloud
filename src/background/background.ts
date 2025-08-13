@@ -22,7 +22,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({ success: true });
       })
       .catch((error) => {
-        console.log("Popup auto-open not available:", error.message);
         // Keep badge to indicate user should click extension icon
         sendResponse({ success: false, needsManualOpen: true });
       });

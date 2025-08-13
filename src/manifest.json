@@ -1,8 +1,10 @@
 {
   "manifest_version": 3,
   "name": "OutLoud",
-  "description": "A chrome extension that allows you to inscribe social media posts on Bitcoin's blockchain.",
+  "description": "Archive your social media posts with immutable, decentralized storage technology for permanent preservation.",
   "version": "0.1.0",
+  "version-name": "0.1.0-alpha",
+  "privacy_policy": "https://github.com/binaryck/outloud/blob/main/PRIVACY_POLICY.md",
   "permissions": ["activeTab", "storage", "scripting"],
   "web_accessible_resources": [
     {
@@ -30,6 +32,7 @@
   },
   "action": {
     "default_popup": "src/popup/popup.html",
+    "default_title": "OutLoud",
     "default_icon": {
       "16": "images/icon-16.png",
       "32": "images/icon-32.png",

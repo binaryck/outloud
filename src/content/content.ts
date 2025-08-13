@@ -71,7 +71,7 @@ function initObserver(): void {
     //console.log("Mutations count:", mutationList.length);
     if (!username) {
       username = getUsername();
-      console.log("Username set to:", username);
+      //console.log("Username set to:", username);
     }
 
     // Check for new posts
@@ -98,7 +98,7 @@ function initObserver(): void {
                   !isRepost &&
                   !post.querySelector(".outloud-button")
                 ) {
-                  console.log("Adding repost button to post:", post);
+                  //console.log("Adding repost button to post:", post);
                   addRepostButton(post as HTMLElement);
                 }
               });
