@@ -1,6 +1,6 @@
 {
   "name": "outloud",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Archive your social media posts with immutable, decentralized storage technology for permanent preservation.",
   "main": "index.js",
   "scripts": {
