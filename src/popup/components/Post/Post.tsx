@@ -40,9 +40,7 @@ export function Post({ post, onLike }: PostProps) {
             {post.content?.author || post.owner}
           </div>
         </div>
-        <div className="post-timestamp">
-          {formatTimestamp(post.block_height)}
-        </div>
+        <div className="post-timestamp">{formatTimestamp(post.created_at)}</div>
       </div>
 
       <div className="post-content">{formatContent(post.content.txt)}</div>

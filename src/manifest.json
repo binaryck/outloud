@@ -16,7 +16,11 @@
     "service_worker": "src/background/background.ts",
     "type": "module"
   },
-  "host_permissions": ["https://x.com/*", "https://twitter.com/*"],
+  "host_permissions": [
+    "https://x.com/*",
+    "https://twitter.com/*",
+    "http://localhost:3001/*"
+  ],
   "content_scripts": [
     {
       "matches": ["https://x.com/*", "https://twitter.com/*"],

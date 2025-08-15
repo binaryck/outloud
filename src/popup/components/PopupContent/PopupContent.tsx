@@ -27,16 +27,16 @@ export function PopupContent(): React.JSX.Element {
   const [searchedAddress, setSearchedAddress] = useState("");
 
   // Feed functionality
-  const { 
-    posts, 
-    loading, 
-    error, 
-    currentPage, 
-    totalPages, 
-    totalPosts, 
-    fetchFeed, 
-    likePost, 
-    setPage 
+  const {
+    posts,
+    loading,
+    error,
+    currentPage,
+    totalPages,
+    totalPosts,
+    fetchFeed,
+    likePost,
+    setPage,
   } = useFeed();
 
   const handleToggleSearch = () => {
