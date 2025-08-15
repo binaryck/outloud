@@ -1,12 +1,17 @@
 import { Post } from "../components/Post/Post";
 import { Content } from "../interfaces/content";
+import { Pagination } from "../components/Pagination/Pagination";
 
 interface FeedPageProps {
   address: string;
   posts: Content[];
   loading: boolean;
   error: string | null;
+  currentPage: number;
+  totalPages: number;
+  totalPosts: number;
   onLike: (postId: string) => void;
+  onPageChange: (page: number) => void;
 }
 
 export function FeedPage({
@@ -14,7 +19,11 @@ export function FeedPage({
   posts,
   loading,
   error,
+  currentPage,
+  totalPages,
+  totalPosts,
   onLike,
+  onPageChange,
 }: FeedPageProps) {
   const formatAddress = (addr: string) => {
     if (addr.length <= 12) return addr;
@@ -63,7 +72,7 @@ export function FeedPage({
           <span>Feed from {formatAddress(address)}</span>
         </div>
         <div className="feed-stats">
-          {posts.length} post{posts.length !== 1 ? "s" : ""} found
+          {totalPosts} post{totalPosts !== 1 ? "s" : ""} found
         </div>
       </div>
 
@@ -78,12 +87,23 @@ export function FeedPage({
           </div>
         ) : (
           <div className="feed-posts">
-            {posts.map((post) => (
-              <Post key={post.id} post={post} onLike={onLike} />
-            ))}
+            {posts.map(
+              (post) =>
+                post.content.type === "post" && (
+                  <Post key={post.inscription_id} post={post} onLike={onLike} />
+                )
+            )}
           </div>
         )}
       </div>
+
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
+      )}
     </div>
   );
 }

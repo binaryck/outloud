@@ -27,7 +27,17 @@ export function PopupContent(): React.JSX.Element {
   const [searchedAddress, setSearchedAddress] = useState("");
 
   // Feed functionality
-  const { posts, loading, error, fetchFeed, likePost } = useFeed();
+  const { 
+    posts, 
+    loading, 
+    error, 
+    currentPage, 
+    totalPages, 
+    totalPosts, 
+    fetchFeed, 
+    likePost, 
+    setPage 
+  } = useFeed();
 
   const handleToggleSearch = () => {
     setIsToolbarOpen(!isToolbarOpen);
@@ -70,7 +80,11 @@ export function PopupContent(): React.JSX.Element {
                 posts={posts}
                 loading={loading}
                 error={error}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                totalPosts={totalPosts}
                 onLike={likePost}
+                onPageChange={setPage}
               />
             }
           />

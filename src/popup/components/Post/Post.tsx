@@ -1,6 +1,5 @@
 import React from "react";
 import { Content } from "@/popup/interfaces/content";
-import { LikeButton } from "../LikeButton/LikeButton";
 
 interface PostProps {
   post: Content;
@@ -22,6 +21,7 @@ export function Post({ post, onLike }: PostProps) {
   };
 
   const formatContent = (content: string) => {
+    if (!content) return null;
     return content.split("\n").map((line, index) => (
       <React.Fragment key={index}>
         {line}
@@ -36,12 +36,16 @@ export function Post({ post, onLike }: PostProps) {
         {/* To add user avatar, and differenciate between author and wallet */}
         {/*<div className="post-avatar">{post.author.avatar}</div>*/}
         <div className="post-author-info">
-          <div className="post-author-username">{post.author || "Unknown"}</div>
+          <div className="post-author-username">
+            {post.content?.author || post.owner}
+          </div>
         </div>
-        <div className="post-timestamp">{formatTimestamp(post.timestamp)}</div>
+        <div className="post-timestamp">
+          {formatTimestamp(post.block_height)}
+        </div>
       </div>
 
-      <div className="post-content">{formatContent(post.content)}</div>
+      <div className="post-content">{formatContent(post.content.txt)}</div>
 
       {post.inscription_id && (
         <div className="post-inscription-info">
