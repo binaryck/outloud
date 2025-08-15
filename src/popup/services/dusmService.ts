@@ -147,15 +147,9 @@ export class DusmService {
   }
 
   public async likePost(postId: string): Promise<boolean> {
+    //Service to inscribe a like on a post
     // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 300));
-
-    const post = this.mockPosts.find((p) => p.id === postId);
-    if (post) {
-      post.isLiked = !post.isLiked;
-      post.likes += post.isLiked ? 1 : -1;
-      return true;
-    }
-    return false;
+    return true; // Mock response, to implement the real one
   }
 }

@@ -1195,6 +1195,118 @@ body {
   color: $text-muted;
   line-height: 1.4;
 }
+
+// === FEED PAGE ===
+.feed-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: transparent;
+}
+
+.feed-header {
+  padding: $space-xs 0 $space-sm 0;
+  border-bottom: 1px solid $border-lighter;
+  margin-bottom: $space-lg;
+  background: transparent;
+}
+
+.feed-title {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin-bottom: $space-xs;
+}
+
+.feed-stats {
+  font-size: $font-size-xs;
+  color: $text-muted;
+}
+
+.feed-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-4xl;
+  text-align: center;
+  background: transparent;
+}
+
+.loading-spinner-large {
+  font-size: 2rem;
+  color: $brand-color;
+  animation: spin 1s linear infinite;
+  margin-bottom: $space-lg;
+}
+
+.loading-text {
+  color: $text-muted;
+  font-size: $font-size-sm;
+}
+
+.feed-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-4xl;
+  text-align: center;
+  background: transparent;
+}
+
+.error-icon {
+  font-size: 2rem;
+  margin-bottom: $space-lg;
+}
+
+.error-text {
+  color: $status-error;
+  font-size: $font-size-sm;
+}
+
+.feed-content {
+  flex: 1;
+  background: transparent;
+  padding-bottom: $space-4xl;
+}
+
+.feed-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-4xl;
+  text-align: center;
+  background: transparent;
+}
+
+.empty-icon {
+  font-size: 2rem;
+  margin-bottom: $space-lg;
+}
+
+.empty-text {
+  color: $text-secondary;
+  font-size: $font-size-base;
+  margin-bottom: $space-sm;
+}
+
+.empty-subtext {
+  color: $text-muted;
+  font-size: $font-size-sm;
+}
+
+.feed-posts {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  background: transparent;
+}
+
 // === POST COMPONENT ===
 .post-card {
   background: $bg-card;
