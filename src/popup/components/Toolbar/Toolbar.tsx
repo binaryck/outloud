@@ -33,7 +33,6 @@ export function Toolbar({
     <div className="search-toolbar">
       <div className="search-toolbar-header">
         <button className="back-to-home-btn" onClick={handleBackToHome}>
-          {/*<span className="back-arrow-toolbar">←</span>*/}
           <span>
             <BackArrow size={18} strokeWidth={2} />
           </span>
