@@ -4,6 +4,7 @@ interface ButtonProps {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   text?: string;
+  icon?: boolean;
   disabled?: boolean;
   variant?: "primary" | "secondary" | "ghost" | "danger";
   fullWidth?: boolean;
@@ -14,6 +15,7 @@ export function Button({
   onClick,
   type = "button",
   text = "Inscribe on Bitcoin",
+  icon = true,
   disabled = false,
   variant = "primary",
   fullWidth = false,
@@ -33,7 +35,7 @@ export function Button({
       disabled={disabled}
       className={getButtonClasses()}
     >
-      🔗 {text}
+      {icon && <span>🔗</span>} {text}
     </button>
   );
 }
