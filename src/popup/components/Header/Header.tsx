@@ -6,7 +6,10 @@ interface HeaderProps {
   onToggleSearch?: () => void;
 }
 
-export function Header({ subtitle, onToggleSearch }: HeaderProps): React.JSX.Element {
+export function Header({
+  subtitle,
+  onToggleSearch,
+}: HeaderProps): React.JSX.Element {
   return (
     <div className="header">
       <div className="header-content">
