@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Post } from "../types/post";
+import { Content } from "../interfaces/content";
 
 export function useSelectedPost() {
   const navigate = useNavigate();
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [selectedPost, setSelectedPost] = useState<Content | null>(null);
 
   // Load post data from storage when popup opens
   useEffect(() => {

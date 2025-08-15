@@ -1,8 +1,8 @@
 import React from "react";
-import { Post } from "../../types/post";
+import { Content } from "@/popup/interfaces/content";
 
 interface PostCardProps {
-  post: Post | null;
+  post: Content | null;
 }
 
 export function PostCard({ post }: PostCardProps): React.JSX.Element {

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import PostCard from "../PostCard/PostCard";
 import Button from "../Button/Button";
-import { Post } from "../../types/post";
+import { Content } from "@/popup/interfaces/content";
 import { TextInput } from "../TextInput/TextInput";
 
 interface PostSectionProps {
-  post: Post | null;
+  post: Content | null;
   onInscribe: (receiverPubKey: string) => void;
   isInscribing?: boolean;
 }

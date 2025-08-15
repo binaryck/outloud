@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Post } from "../types/post";
+import { Content } from "../interfaces/content";
 import { useServices } from "../context/serviceContext";
 import { DusmPost } from "../types/dusm";
 
 export function useInscribe(
-  post: Post | null,
+  post: Content | null,
   xverseDetected: boolean,
   unisatDetected: boolean
 ) {

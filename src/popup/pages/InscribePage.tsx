@@ -1,9 +1,9 @@
 import PostSection from "../components/PostSection/PostSection";
-import { Post } from "../types/post";
+import { Content } from "../interfaces/content";
 import { BackArrow } from "../components/BackArrow/BackArrow";
 
 type InscribePageProps = {
-  post: Post | null;
+  post: Content | null;
   onInscribe: (receiverPubKey: string) => Promise<void>;
   isInscribing?: boolean;
 };
