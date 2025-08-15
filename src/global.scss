@@ -1463,3 +1463,38 @@ body {
     border-top-color: $bg-overlay;
   }
 }
+
+// === PAGINATION ===
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-lg $space-xl;
+  border-top: 1px solid #{$brand-color}20;
+  background: transparent;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+}
+
+.pagination-ellipsis {
+  color: $text-muted;
+  font-size: $font-size-sm;
+  padding: 0 $space-xs;
+}
+
+.pagination-info {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  text-align: center;
+}
