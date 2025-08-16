@@ -11,6 +11,7 @@ export interface Content {
   content_length: string;
   metadata_str: string;
   created_at: string;
-  owner: string;
   protocol: string;
+  owner?: string;
+  author?: string;
 }

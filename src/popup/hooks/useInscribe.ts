@@ -32,19 +32,19 @@ export function useInscribe(
         op: "pub",
         type: "post",
         txt: post.content,
-        author: post.author,
-        from: post.platform,
+        author: post.author!,
+        from: "x",
         edit: false,
       };
 
-      if (xverseDetected) {
-        walletService.payWithXverse(
+      if (unisatDetected) {
+        walletService.payWithUnisat(
           ordinalsBotService,
           inscription,
           receiverPubKey
         );
-      } else if (unisatDetected) {
-        walletService.payWithUnisat(
+      } else if (xverseDetected) {
+        walletService.payWithXverse(
           ordinalsBotService,
           inscription,
           receiverPubKey
