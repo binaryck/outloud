@@ -58,7 +58,7 @@ export function PopupContent(): React.JSX.Element {
   return (
     <>
       <Header
-        subtitle="No voice can be silenced or erased from history"
+        subtitle="No voice can be erased from history"
         onToggleSearch={handleToggleSearch}
       />
 

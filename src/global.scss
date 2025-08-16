@@ -865,7 +865,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: $space-lg;
-  margin-bottom: $space-sm;
+  margin-bottom: $space-xs;
+  padding-right: 0.5rem;
   position: relative;
 
   &::before {
@@ -924,7 +925,7 @@ body {
 .tagline {
   font-size: 1.1rem;
   color: $text-muted;
-  margin: $space-sm 0 0 0;
+  margin: $space-xs 0 0 0;
   letter-spacing: 0.5px;
   opacity: 0.8;
   font-weight: 300;

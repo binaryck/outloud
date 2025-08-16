@@ -44,7 +44,7 @@ export function useFeed(): UseFeedResult {
 
     try {
       //console.log("Fetching feed from:", address);
-      const url = new URL("http://localhost:3001/api/contents");
+      const url = new URL("http://16.170.234.92:80/api/contents");
       url.searchParams.append("owner", address);
       url.searchParams.append("page", page.toString());
       url.searchParams.append("limit", "10");

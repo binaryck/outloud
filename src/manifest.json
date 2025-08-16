@@ -19,7 +19,7 @@
   "host_permissions": [
     "https://x.com/*",
     "https://twitter.com/*",
-    "http://localhost:3001/*"
+    "http://16.170.234.92:80/*"
   ],
   "content_scripts": [
     {
