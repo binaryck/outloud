@@ -1178,6 +1178,11 @@ body {
   @extend .input;
   flex: 1;
   font-size: $font-size-sm;
+
+  &.search-input-error {
+    border-color: #ff4444;
+    box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.2);
+  }
 }
 
 .search-button {
@@ -1195,6 +1200,16 @@ body {
   font-size: $font-size-xs;
   color: $text-muted;
   line-height: 1.4;
+}
+
+.validation-error {
+  font-size: $font-size-xs;
+  color: #ff4444;
+  margin-top: $space-xs;
+  padding: $space-xs;
+  background: rgba(255, 68, 68, 0.1);
+  border-radius: $radius-sm;
+  border: 1px solid rgba(255, 68, 68, 0.3);
 }
 
 // === FEED PAGE ===

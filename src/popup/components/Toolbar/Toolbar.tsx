@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BackArrow } from "../BackArrow/BackArrow";
+import { bitmapValidator } from "@/popup/utils/bitmapValidator";
 
 interface ToolbarProps {
   isOpen: boolean;
@@ -15,12 +16,37 @@ export function Toolbar({
   loading = false,
 }: ToolbarProps) {
   const [address, setAddress] = useState("");
+  const [validationError, setValidationError] = useState("");
+
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newAddress = e.target.value;
+    setAddress(newAddress);
+
+    // Clear previous validation error
+    setValidationError("");
+
+    // Validate if it's a bitmap address
+    if (newAddress) {
+      const error = bitmapValidator(newAddress.trim());
+      if (error) {
+        setValidationError(error);
+      }
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (address.trim()) {
-      onSearch(address.trim());
+
+    if (!address) return;
+
+    // Validate before submitting
+    const error = bitmapValidator(address.trim());
+    if (error) {
+      setValidationError(error);
+      return;
     }
+
+    onSearch(address.trim());
   };
 
   const handleBackToHome = () => {
@@ -50,15 +76,17 @@ export function Toolbar({
             <input
               type="text"
               value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Enter Bitcoin address..."
-              className="search-input"
+              onChange={handleAddressChange}
+              placeholder="Address, bitmap or domain"
+              className={`search-input ${
+                validationError ? "search-input-error" : ""
+              }`}
               disabled={loading}
             />
             <button
               type="submit"
               className="search-button"
-              disabled={loading || !address.trim()}
+              disabled={loading || !address || !!validationError}
             >
               {loading ? (
                 <span className="loading-spinner">⟳</span>
@@ -67,6 +95,9 @@ export function Toolbar({
               )}
             </button>
           </div>
+          {validationError && (
+            <div className="validation-error">{validationError}</div>
+          )}
         </form>
         <div className="search-hint">
           Enter any Bitcoin address to view their social media feed preserved on

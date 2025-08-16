@@ -27,7 +27,7 @@
 
 ---
 
-## ✨ Why us?
+## ✨ Why
 
 - 🔒 **Immutable Storage** - Posts are permanently inscribed as Bitcoin Ordinals
 - 🌐 **Decentralized** - No central authority can remove or censor content
