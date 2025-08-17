@@ -17,8 +17,11 @@ export class WalletService {
   ): Promise<OrderDetails> => {
     const jsonString = JSON.stringify(inscription);
 
-    // Browser-native btoa()
-    const base64 = btoa(jsonString);
+    // Unicode-safe base64 encoding
+    // First encode to UTF-8 bytes, then convert to base64
+    const utf8Bytes = new TextEncoder().encode(jsonString);
+    const base64 = btoa(String.fromCharCode(...utf8Bytes));
+
     const dataURL = `data:text/plain;base64,${base64}`;
 
     // Use browser-native way to get byte length
