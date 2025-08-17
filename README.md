@@ -5,7 +5,7 @@
 <div align="center">
   <img src="public/images/logo-1080.png" alt="OutLoud Logo" width="128" height="128">
   
-  **Preserve Free Speech on Bitcoin**
+  **Preserve Freedom of Information on Bitcoin**
   
   *A Chrome extension that immortalizes social media posts on Bitcoin's immutable ledger*
 
@@ -17,7 +17,7 @@
 
 ---
 
-## 🚀 What is OutLoud?
+## What is OutLoud?
 
 **OutLoud** is a powerful Chrome extension that champions **free speech** by allowing users to inscribe social media posts from X (formerly Twitter) directly onto Bitcoin Ordinals. It's a repost, on the blockchain! We live in an era where digital censorship is increasing, OutLoud ensures that important voices and messages are preserved forever on the world's most secure and decentralized network using Bitcoin's Ordinals protocol.
 
@@ -66,6 +66,8 @@
 
 ### Example Workflow
 
+#### 📝 Inscribing a Post
+
 ```
 📱 Choose a post from X
     ↓
@@ -74,6 +76,18 @@
 ✍️ Inscribe post to Bitcoin
     ↓
 🌍 Share immutable proof
+```
+
+#### 🔍 Navigation
+
+```
+🔧 Open OutLoud extension
+    ↓
+🏷️ Add Bitcoin address, bitmap, or .btc/.sats name
+    ↓
+🔍 Click on "Search"
+    ↓
+📜 Access the immutable feed
 ```
 
 ---
