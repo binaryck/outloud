@@ -21,18 +21,18 @@
 
 **OutLoud** is a powerful Chrome extension that champions **free speech** by allowing users to inscribe social media posts from X (formerly Twitter) directly onto Bitcoin Ordinals. It's a repost, on the blockchain! We live in an era where digital censorship is increasing, OutLoud ensures that important voices and messages are preserved forever on the world's most secure and decentralized network using Bitcoin's Ordinals protocol.
 
-### 🎯 Mission
+### Mission
 
 > _To create an uncensorable archive of human expression, ensuring that no voice can be silenced or erased from history._
 
 ---
 
-## ✨ Why
+## Why
 
 - 🔒 **Immutable Storage** - Posts are permanently inscribed as Bitcoin Ordinals
 - 🌐 **Decentralized** - No central authority can remove or censor content
 - 🔧 **Easy to Use** - Simple one-click inscription from any X post
-- 💎 **DUSM Powered** - Built on DUSM protocol, it allows the posts to be visible on every DUSM-compliant application
+- ⚙️ **DUSM Powered** - Built on DUSM protocol, it allows the posts to be visible on every DUSM-compliant application
 - 🔐 **Transparent** - All inscriptions are publicly verifiable on Bitcoin Ordinals
 - ⚡ **Fast & Secure** - Leverages Bitcoin's proven security model
 
@@ -67,20 +67,18 @@
 ### Example Workflow
 
 ```
-📱 Find interesting post on X
+📱 Choose a post from X
     ↓
-🔧 Click OutLoud extension
+🔧 Click on "Repost to Bitcoin"
     ↓
 ✍️ Inscribe post to Bitcoin
-    ↓
-🔗 Get permanent blockchain link
     ↓
 🌍 Share immutable proof
 ```
 
 ---
 
-## 🌟 Why OutLoud Matters
+## Why OutLoud Matters
 
 ### 📣 **Defending Free Speech**
 
@@ -105,7 +103,7 @@ As long as Bitcoin exists, your Ordinals inscriptions remain accessible to anyon
 - **Manifest Version**: 3
 - **Platform**: Chrome Extension
 - **Blockchain**: Bitcoin Ordinals
-- **Protocol**: DUSM
+- **Protocol**: DUSM - https://dusm.gitbook.io/docs
 - **Version**: 0.1.0
 
 ### Supported Platforms
@@ -145,7 +143,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### 🚀 **Start Preserving Free Speech Today**
 
-_Every voice matters. Every post counts. Make yours permanent._
+_Every word matters. Every post counts. Make yours permanent._
 
 **[Install OutLoud](#) | [Learn More](https://dusm.gitbook.io/docs) | [Contribute](#contributing)**
 

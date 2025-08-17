@@ -165,6 +165,37 @@ body {
   color: $text-primary;
 }
 
+// === CUSTOM SCROLLBAR ===
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, $brand-color 0%, $brand-light 100%);
+  border-radius: 4px;
+  transition: all $transition-normal;
+
+  &:hover {
+    background: linear-gradient(135deg, $brand-light 0%, $brand-color 100%);
+    box-shadow: 0 0 10px rgba(247, 147, 26, 0.3);
+  }
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: $brand-dark;
+}
+
+// Firefox scrollbar
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $brand-color rgba(255, 255, 255, 0.05);
+}
+
 // === LAYOUT CLASSES ===
 .container {
   background: $bg-primary;
@@ -178,8 +209,10 @@ body {
   @extend .container;
   width: 360px;
   min-height: 500px;
-  max-height: 720px;
+  max-height: 600px;
+  height: 600px;
   background: $bg-primary;
+  overflow: hidden;
 }
 
 .container-settings {
@@ -538,7 +571,8 @@ body {
   display: flex;
   flex-direction: column;
   background: $bg-primary;
-  //overflow-y: auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .section-title {
@@ -719,7 +753,8 @@ body {
 .home-page {
   display: flex;
   flex-direction: column;
-  //min-height: 500px;
+  flex: 1;
+  min-height: 0;
   background: radial-gradient(
       ellipse at center,
       rgba(247, 147, 26, 0.03) 0%,
@@ -1080,10 +1115,11 @@ body {
 }
 
 .action-zone {
-  padding: 0 $space-lg $space-2xl;
+  padding: 0 $space-lg $space-lg;
   text-align: center;
   position: relative;
   z-index: 1;
+  margin-top: $space-md;
 }
 
 .hint-text {
@@ -1216,8 +1252,10 @@ body {
 .feed-page {
   display: flex;
   flex-direction: column;
+  flex: 1;
   height: 100%;
   background: transparent;
+  min-height: 0;
 }
 
 .feed-header {
@@ -1244,6 +1282,7 @@ body {
 
 .feed-loading {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -1266,6 +1305,7 @@ body {
 
 .feed-error {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -1286,12 +1326,17 @@ body {
 
 .feed-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   background: transparent;
-  padding-bottom: $space-4xl;
+  min-height: 0;
+  overflow: visible;
+  margin-bottom: $space-lg;
 }
 
 .feed-empty {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -1321,6 +1366,9 @@ body {
   flex-direction: column;
   gap: $space-lg;
   background: transparent;
+  flex: 1;
+  min-height: 0;
+  padding: 0 0 $space-xl 0;
 }
 
 // === POST COMPONENT ===
@@ -1486,7 +1534,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: $space-md;
-  padding: $space-lg $space-xl;
+  padding: $space-md $space-xl;
   border-top: 1px solid #{$brand-color}20;
   background: transparent;
 }
