@@ -346,8 +346,8 @@ body {
 
   &:hover:not(:disabled) {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(247, 147, 26, 0.4),
-      0 0 20px rgba(247, 147, 26, 0.2);
+    box-shadow: 0 4px 15px rgba(247, 147, 26, 0.4),
+      0 0 10px rgba(247, 147, 26, 0.3);
 
     &::before {
       left: 100%;
@@ -377,7 +377,7 @@ body {
   }
   50% {
     box-shadow: 0 4px 15px rgba(247, 147, 26, 0.3),
-      0 0 0 10px rgba(247, 147, 26, 0);
+      0 0 0 8px rgba(247, 147, 26, 0);
   }
 }
 
@@ -570,7 +570,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: $bg-primary;
+  background: transparent;
   min-height: 0;
   overflow-y: auto;
 }
