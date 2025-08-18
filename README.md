@@ -49,10 +49,12 @@
 ### Manual Installation (Developer Mode)
 
 1. Download or clone this repository
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" in the top right
-4. Click "Load unpacked" and select the extension folder
-5. OutLoud will appear in your extensions toolbar
+2. npm install
+3. npm run build
+4. Open Chrome and navigate to `chrome://extensions/`
+5. Enable "Developer mode" in the top right
+6. Click "Load unpacked" and select the dist folder
+7. OutLoud will appear in your extensions toolbar
 
 ---
 
