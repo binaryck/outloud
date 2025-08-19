@@ -7,15 +7,15 @@ interface CardProps {
   hover?: boolean;
 }
 
-export function Card({ 
-  children, 
-  className = "", 
+export function Card({
+  children,
+  className = "",
   padding = "lg",
-  hover = true 
+  hover = true,
 }: CardProps) {
   const paddingClass = `card-padding-${padding}`;
   const hoverClass = hover ? "card-hover" : "";
-  
+
   return (
     <div className={`card ${paddingClass} ${hoverClass} ${className}`}>
       {children}

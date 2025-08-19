@@ -11,6 +11,8 @@ import { useSelectedPost } from "../../hooks/useSelectedPost";
 import { useInscribe } from "../../hooks/useInscribe";
 import { useFeed } from "../../hooks/useFeed";
 import { Toolbar } from "../Toolbar/Toolbar";
+import { BitmapExplorerPage } from "@/popup/pages/BitmapExplorerPage";
+import { CreatePostPage } from "@/popup/pages/CreatePostPage";
 
 export function PopupContent(): React.JSX.Element {
   const navigate = useNavigate();
@@ -55,6 +57,16 @@ export function PopupContent(): React.JSX.Element {
     await fetchFeed(address);
   };
 
+  const handleCreatePost = () => {
+    setIsToolbarOpen(false);
+    navigate("create-post");
+  };
+
+  const handleBitmapExplorer = () => {
+    setIsToolbarOpen(false);
+    navigate("bitmap-explorer");
+  };
+
   return (
     <>
       <Header
@@ -66,6 +78,8 @@ export function PopupContent(): React.JSX.Element {
         isOpen={isToolbarOpen}
         onClose={handleCloseToolbar}
         onSearch={handleSearch}
+        onCreatePost={handleCreatePost}
+        onBitmapExplorer={handleBitmapExplorer}
         loading={loading}
       />
 
@@ -97,6 +111,14 @@ export function PopupContent(): React.JSX.Element {
                 isInscribing={isInscribing}
               />
             }
+          />
+          <Route
+            path="/create-post"
+            element={<CreatePostPage isInscribing={isInscribing} />}
+          />
+          <Route
+            path="/bitmap-explorer"
+            element={<BitmapExplorerPage isInscribing={isInscribing} />}
           />
         </Routes>
       </div>
