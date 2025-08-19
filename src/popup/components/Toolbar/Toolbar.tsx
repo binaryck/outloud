@@ -143,7 +143,7 @@ export function Toolbar({
         </Card>
 
         {/* Create Post Section */}
-        <Card className="toolbar-section" padding="xl">
+        {/*<Card className="toolbar-section" padding="xl">
           <div className="section-header">
             <div className="section-icon">✍️</div>
             <div className="section-info">
@@ -165,7 +165,7 @@ export function Toolbar({
               <span className="button-text">Create</span>
             </button>
           </div>
-        </Card>
+        </Card>*/}
       </div>
     </div>
   );
