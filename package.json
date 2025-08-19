@@ -15,13 +15,16 @@
   "dependencies": {
     "@chakra-ui/react": "^3.24.2",
     "@emotion/react": "^11.14.0",
+    "@mempool/mempool.js": "^3.0.0",
+    "@types/three": "^0.179.0",
     "lucide-react": "^0.536.0",
     "next-themes": "^0.4.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.7.1",
-    "sats-connect": "^3.6.1"
+    "sats-connect": "^3.6.1",
+    "three": "^0.179.1"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.3",
