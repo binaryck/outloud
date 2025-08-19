@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { bitmapValidator } from "@/popup/utils/bitmapValidator";
-import { Card } from "../Card";
+import { Card } from "../Card/Card";
 
 interface ToolbarProps {
   isOpen: boolean;

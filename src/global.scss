@@ -1777,6 +1777,86 @@ body {
   padding: 0 $space-xs;
 }
 
+// === BITMAP EXPLORER PAGE ===
+.bitmap-explorer-page {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+  padding: $space-lg;
+}
+
+.search-bitmap-section {
+  .section-header {
+    margin-bottom: $space-lg;
+  }
+}
+
+.bitmap-search-form {
+  .form-group {
+    display: flex;
+    gap: $space-sm;
+    margin-bottom: $space-md;
+  }
+}
+
+.bitmap-results-section {
+  .block-hash-result {
+    background: rgba(247, 147, 26, 0.05);
+    border: 1px solid rgba(247, 147, 26, 0.2);
+    border-radius: $radius-sm;
+    padding: $space-md;
+    margin-top: $space-md;
+  }
+
+  .result-label {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    margin: 0 0 $space-xs 0;
+    font-weight: $font-weight-medium;
+  }
+
+  .result-value {
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+    font-size: $font-size-xs;
+    color: $brand-color;
+    background: rgba(0, 0, 0, 0.3);
+    padding: $space-xs $space-sm;
+    border-radius: $radius-sm;
+    word-break: break-all;
+    display: block;
+    margin: 0;
+  }
+}
+
+.bitmap-explorer-section {
+  .explorer-placeholder {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: $radius-md;
+    margin-top: $space-lg;
+  }
+
+  .placeholder-content {
+    text-align: center;
+    color: $text-muted;
+
+    .placeholder-icon {
+      font-size: $font-size-4xl;
+      margin-bottom: $space-md;
+      opacity: 0.5;
+    }
+
+    p {
+      margin: 0;
+      font-size: $font-size-sm;
+    }
+  }
+}
+
 .pagination-info {
   font-size: $font-size-sm;
   color: $text-muted;
