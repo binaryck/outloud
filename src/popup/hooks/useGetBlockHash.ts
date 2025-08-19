@@ -3,19 +3,19 @@ import mempoolJS from "@mempool/mempool.js";
 
 interface UseGetBlockHashReturn {
   getBlockHash: (bitmapNumber: number) => Promise<any>;
-  loading: boolean;
-  error: string | null;
+  loadingBlockHash: boolean;
+  errorBlockHash: string | null;
   blockHash: string | null;
 }
 
 export function useGetBlockHash(): UseGetBlockHashReturn {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loadingBlockHash, setLoadingBlockHash] = useState(false);
+  const [errorBlockHash, setErrorBlockHash] = useState<string | null>(null);
   const [blockHash, setBlockHash] = useState<string | null>(null);
 
   const getBlockHash = async (bitmapNumber: number) => {
-    setLoading(true);
-    setError(null);
+    setLoadingBlockHash(true);
+    setErrorBlockHash(null);
     setBlockHash(null);
 
     try {
@@ -29,17 +29,17 @@ export function useGetBlockHash(): UseGetBlockHashReturn {
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Failed to fetch block data";
-      setError(errorMessage);
+      setErrorBlockHash(errorMessage);
       return null;
     } finally {
-      setLoading(false);
+      setLoadingBlockHash(false);
     }
   };
 
   return {
     getBlockHash,
-    loading,
-    error,
+    loadingBlockHash,
+    errorBlockHash,
     blockHash,
   };
 }
