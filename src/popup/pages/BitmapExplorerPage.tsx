@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "../components//Card/Card";
 import { useGetBlockHash } from "../hooks/useGetBlockHash";
 import { useGetBlockTransactions } from "../hooks/useGetBlockTransactions";
+import ThreeViewer from "../components/ThreeViewer/ThreeViewer";
+import * as THREE from "three";
 
 type BitmapPageProps = {
   isInscribing: boolean;
@@ -59,11 +61,14 @@ export const BitmapExplorerPage = ({ isInscribing }: BitmapPageProps) => {
     const bitmapNumber = validateBitmap(bitmapInput);
     if (bitmapNumber === null) return;
 
-    await getBlockHash(bitmapNumber);
-    await getBlockTransactions(blockHash);
-
-    console.log("Block transactions", transactions);
+    getBlockHash(bitmapNumber);
   };
+
+  useEffect(() => {
+    if (blockHash) {
+      getBlockTransactions(blockHash);
+    }
+  }, [blockHash]);
 
   return (
     <div className="bitmap-explorer-page">
@@ -125,12 +130,25 @@ export const BitmapExplorerPage = ({ isInscribing }: BitmapPageProps) => {
           Interactive 3D visualization of Bitcoin blocks and transactions
         </p>
 
-        <div className="explorer-placeholder">
-          <div className="placeholder-content">
-            <div className="placeholder-icon">🎨</div>
-            <p>Bitmap visualization will be displayed here</p>
+        {!transactions.length ? (
+          <div className="explorer-placeholder">
+            <div className="placeholder-content">
+              <div className="placeholder-icon">🎨</div>
+              <p>Bitmap visualization will be displayed here</p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <ThreeViewer
+            id="bitmap-visualization"
+            className="bitmap-visualization"
+            onSceneSetup={(scene, camera, renderer) => {
+              // Scene, camera, and renderer
+            }}
+            animate={(scene, camera, renderer) => {
+              // Animation loop
+            }}
+          />
+        )}
       </Card>
     </div>
   );
