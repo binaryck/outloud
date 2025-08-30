@@ -92,13 +92,13 @@ const ThreeViewer: React.FC<ThreeViewerProps> = ({
       renderer.dispose();
       mount.removeChild(renderer.domElement);
     };
-  }, []);
+  }, [onSceneSetup]);
 
   return (
     <div
       id={id}
       className={className}
-      style={{ width: "100%", height: "100%", ...style }}
+      style={{ width: "100%", height: "300px", ...style }}
       ref={mountRef}
     />
   );
