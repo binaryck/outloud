@@ -27,11 +27,20 @@ export const useGetBlockTransactions = () => {
 
     try {
       console.log("blockHash", blockHash);
-      const response = await fetch(
-        `https://mempool.space/api/block/${blockHash}/txs`
-      );
-      const data = await response.json();
-      setTransactions(data);
+      let transactionsFetchCompleted = false;
+      let incompleteTransactions: Transaction[] = [];
+      while (!transactionsFetchCompleted) {
+        const response = await fetch(
+          `https://mempool.space/api/block/${blockHash}/txs/${incompleteTransactions.length}`
+        );
+        const data = await response.json();
+        incompleteTransactions = [...incompleteTransactions, ...data];
+        if (data.length < 25) {
+          // All transactions are fetched
+          transactionsFetchCompleted = true;
+          setTransactions(incompleteTransactions);
+        }
+      }
     } catch (err: any) {
       setErrorBlockTransactions(err.message);
     } finally {
