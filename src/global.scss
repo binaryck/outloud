@@ -1795,6 +1795,7 @@ body {
   .form-group {
     display: flex;
     gap: $space-sm;
+    margin-top: $space-md;
     margin-bottom: $space-md;
   }
 }
@@ -1873,7 +1874,11 @@ body {
 }
 
 .transaction-info-card {
-  background: linear-gradient(135deg, rgba(247, 147, 26, 0.03) 0%, rgba(247, 147, 26, 0.01) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(247, 147, 26, 0.03) 0%,
+    rgba(247, 147, 26, 0.01) 100%
+  );
   border: 1px solid $border-primary;
   border-radius: $radius-lg;
   padding: $space-xl;
@@ -1971,7 +1976,11 @@ body {
   border: 1px solid $border-lighter;
 
   &.value-highlight {
-    background: linear-gradient(135deg, rgba(247, 147, 26, 0.05) 0%, rgba(247, 147, 26, 0.02) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(247, 147, 26, 0.05) 0%,
+      rgba(247, 147, 26, 0.02) 100%
+    );
     border-color: rgba(247, 147, 26, 0.2);
   }
 }

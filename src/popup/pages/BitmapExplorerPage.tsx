@@ -89,16 +89,14 @@ export const BitmapExplorerPage = ({ isInscribing }: BitmapPageProps) => {
 
   return (
     <div className="bitmap-explorer-page">
-      {/* Search Bitmap Section */}
-      <Card className="search-bitmap-section" padding="xl">
-        <div className="section-header">
-          <h2 className="section-title">Search Bitmap</h2>
-          <p className="section-description">
-            Enter a bitmap number (0-900000) followed by .bitmap to get block
-            hash from block height
-          </p>
-        </div>
+      {/* Bitmap Explorer Section */}
+      <Card className="bitmap-explorer-section" padding="xl">
+        <h2 className="section-title">Bitmap Explorer</h2>
+        <p className="section-description">
+          Interactive 3D visualization of Bitcoin blocks and transactions
+        </p>
 
+        {/* Search bitmap */}
         <form onSubmit={handleSearch} className="bitmap-search-form">
           <div className="form-group">
             <input
@@ -138,14 +136,6 @@ export const BitmapExplorerPage = ({ isInscribing }: BitmapPageProps) => {
             <div className="form-error">{errorBlockTransactions}</div>
           )}
         </form>
-      </Card>
-
-      {/* Bitmap Explorer Section */}
-      <Card className="bitmap-explorer-section" padding="xl">
-        <h2 className="section-title">Bitmap Explorer</h2>
-        <p className="section-description">
-          Interactive 3D visualization of Bitcoin blocks and transactions
-        </p>
 
         {!transactions.length ? (
           <div className="explorer-placeholder">
