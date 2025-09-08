@@ -1,6 +1,7 @@
 {
   "name": "outloud",
   "version": "0.2.1",
+  "type": "module",
   "description": "Archive your social media posts with immutable, decentralized storage technology for permanent preservation.",
   "main": "index.js",
   "scripts": {
@@ -13,8 +14,6 @@
   "author": "binaryck",
   "license": "ISC",
   "dependencies": {
-    "@chakra-ui/react": "^3.24.2",
-    "@emotion/react": "^11.14.0",
     "@mempool/mempool.js": "^3.0.0",
     "@tailwindcss/vite": "^4.1.13",
     "@types/three": "^0.179.0",
