@@ -1857,6 +1857,210 @@ body {
   }
 }
 
+.hover-info {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+}
+
+// === TRANSACTION DETAILS PANEL ===
+.transaction-details-panel {
+  margin-top: $space-xl;
+  border-top: 1px solid $border-lighter;
+  padding-top: $space-lg;
+  min-height: 120px;
+}
+
+.transaction-info-card {
+  background: linear-gradient(135deg, rgba(247, 147, 26, 0.03) 0%, rgba(247, 147, 26, 0.01) 100%);
+  border: 1px solid $border-primary;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  backdrop-filter: blur(10px);
+  transition: all $transition-normal;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, $brand-color 0%, $brand-light 100%);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: rgba(247, 147, 26, 0.4);
+  }
+}
+
+.transaction-header {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+  margin-bottom: $space-xl;
+  padding-bottom: $space-lg;
+  border-bottom: 1px solid $border-lighter;
+}
+
+.transaction-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-lg;
+  background: linear-gradient(135deg, $brand-color 0%, $brand-light 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-xl;
+  color: $text-inverse;
+  font-weight: $font-weight-bold;
+  box-shadow: 0 4px 15px rgba(247, 147, 26, 0.3);
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: $radius-lg;
+    background: linear-gradient(45deg, $brand-color, transparent, $brand-color);
+    opacity: 0;
+    transition: opacity $transition-normal;
+    z-index: -1;
+  }
+
+  &:hover::after {
+    opacity: 0.3;
+  }
+}
+
+.transaction-title {
+  flex: 1;
+
+  h3 {
+    margin: 0 0 $space-xs 0;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+  }
+
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $text-muted;
+  }
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $space-md;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: $radius-md;
+  border: 1px solid $border-lighter;
+
+  &.value-highlight {
+    background: linear-gradient(135deg, rgba(247, 147, 26, 0.05) 0%, rgba(247, 147, 26, 0.02) 100%);
+    border-color: rgba(247, 147, 26, 0.2);
+  }
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: $space-md;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  padding: $space-md;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: $radius-md;
+  border: 1px solid $border-lighter;
+  transition: all $transition-normal;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-1px);
+  }
+}
+
+.detail-label {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+
+  &.txid {
+    font-family: monospace;
+    font-size: $font-size-xs;
+    word-break: break-all;
+    color: $text-secondary;
+    background: rgba(0, 0, 0, 0.2);
+    padding: $space-xs;
+    border-radius: $radius-sm;
+    border: 1px solid $border-lighter;
+  }
+
+  &.btc-amount {
+    color: $brand-color;
+    font-family: monospace;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-base;
+  }
+}
+
+.transaction-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-4xl;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.01);
+  border: 2px dashed $border-lighter;
+  border-radius: $radius-lg;
+  transition: all $transition-normal;
+
+  .placeholder-icon {
+    font-size: 2rem;
+    margin-bottom: $space-lg;
+    opacity: 0.6;
+  }
+
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $text-muted;
+    font-style: italic;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(247, 147, 26, 0.2);
+  }
+}
+
 .pagination-info {
   font-size: $font-size-sm;
   color: $text-muted;
