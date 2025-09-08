@@ -3,7 +3,8 @@ import react from "@vitejs/plugin-react";
 import { crx } from "@crxjs/vite-plugin";
 import manifest from "./src/manifest.json";
 import tsconfigPaths from "vite-tsconfig-paths";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  plugins: [react(), crx({ manifest }), tsconfigPaths()],
+  plugins: [react(), crx({ manifest }), tsconfigPaths(), tailwindcss()],
 });
